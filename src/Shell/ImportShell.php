@@ -5,6 +5,7 @@ namespace App\Shell;
 use App\Model\Entity\Image;
 use App\Model\Entity\Tag;
 use Cake\Console\Shell;
+use Cake\Log\Log;
 
 /**
  * Import shell command.
@@ -17,7 +18,7 @@ class ImportShell extends Shell
 
     public $apiUrl;
 
-    public $perPage = 10;
+    public $perPage = 50;
 
     public function initialize()
     {
@@ -26,21 +27,23 @@ class ImportShell extends Shell
     }
 
 
+    /**
+     * Run import
+     */
     public function run()
     {
-
         //TODO set key to var
         $this->apiUrl = "https://pixabay.com/api/?key=6025170-3537519008d7fe43504b076cc&per_page=" . $this->perPage;
-
         $tags = $this->getTags();
-
         foreach ($tags as $tag) {
-
             $this->getImagesByTag($tag);
         }
     }
 
 
+    /**
+     * @return Tag array
+     */
     public function getTags()
     {
         return $this->Tags->find()->toArray();
@@ -51,7 +54,6 @@ class ImportShell extends Shell
      */
     public function getImagesByTag($tag)
     {
-
         $more = true;
         $round = 1;
         while ($more) {
@@ -61,14 +63,16 @@ class ImportShell extends Shell
                 $this->saveImage($hit, $tag);
             }
 
-            //TODO remove for testing
-            $more = false;
+            Log::info("Running for [Tag={$tag->name}] on [Round={$round}] need [Total={$listOfImages->total}]");
 
+            // if we hit 50 just stop for now
+            if($round == 50 ){
+                $more = false;
+            }
             // to get all img
             if (($round * $this->perPage) < $listOfImages->total) {
                 $more = false;
             }
-
             $round++;
         }
 
