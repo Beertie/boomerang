@@ -39,7 +39,7 @@ class ImagesController extends AppController
                 'imageWidth' => $tag->images[0]->imageWidth,
                 'imageHeight' => $tag->images[0]->imageWidth,
                 'image' => base64_encode(file_get_contents($tag->images[0]->previewURL)),
-                'imaageId' => $tag->images[0]->id
+                'id' => $tag->images[0]->id
             ];
         }
         $this->set('data', $data);
