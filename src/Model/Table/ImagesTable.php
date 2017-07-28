@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * Images Model
  *
  * @property \App\Model\Table\TagsTable|\Cake\ORM\Association\BelongsTo $Tags
+ * @property |\Cake\ORM\Association\HasMany $Resources
  *
  * @method \App\Model\Entity\Image get($primaryKey, $options = [])
  * @method \App\Model\Entity\Image newEntity($data = null, array $options = [])
@@ -44,6 +45,9 @@ class ImagesTable extends Table
             'foreignKey' => 'tag_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('Resources', [
+            'foreignKey' => 'image_id'
+        ]);
     }
 
     /**
@@ -59,8 +63,7 @@ class ImagesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->allowEmpty('name');
 
         $validator
             ->allowEmpty('tags');
@@ -113,9 +116,6 @@ class ImagesTable extends Table
         $validator
             ->integer('type')
             ->allowEmpty('type');
-
-        $validator
-            ->allowEmpty('image');
 
         return $validator;
     }

@@ -4,31 +4,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Image Entity
+ * Resource Entity
  *
  * @property int $id
- * @property string $name
- * @property int $tag_id
- * @property string $tags
- * @property int $webformatHeight
- * @property int $webformatWidth
- * @property int $previewHeight
- * @property int $previewWidth
- * @property int $views
- * @property int $comments
- * @property int $downloads
- * @property string $pageURL
- * @property string $previewURL
- * @property string $webformatURL
- * @property int $imageWidth
- * @property int $imageHeight
- * @property int $type
+ * @property string $type
+ * @property int $image_id
+ * @property string|resource $data
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \App\Model\Entity\Tag $tag
+ * @property \App\Model\Entity\Image $image
  */
-class Image extends Entity
+class Resource extends Entity
 {
 
     /**
