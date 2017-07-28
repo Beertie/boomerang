@@ -25,7 +25,7 @@ class TagsController extends AppController
         $tags = $this->Tags->find('all');
 
         $this->set('data',  $tags->toArray());
-        $this->set('succes', true);
+        $this->set('success', true);
         $this->set('message', null);
         $this->set('_serialize', ['data', 'succes', 'message']);
     }
