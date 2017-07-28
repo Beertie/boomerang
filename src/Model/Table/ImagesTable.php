@@ -63,8 +63,59 @@ class ImagesTable extends Table
             ->notEmpty('name');
 
         $validator
-            ->requirePresence('image', 'create')
-            ->notEmpty('image');
+            ->allowEmpty('tags');
+
+        $validator
+            ->integer('webformatHeight')
+            ->allowEmpty('webformatHeight');
+
+        $validator
+            ->integer('webformatWidth')
+            ->allowEmpty('webformatWidth');
+
+        $validator
+            ->integer('previewHeight')
+            ->allowEmpty('previewHeight');
+
+        $validator
+            ->integer('previewWidth')
+            ->allowEmpty('previewWidth');
+
+        $validator
+            ->integer('views')
+            ->allowEmpty('views');
+
+        $validator
+            ->integer('comments')
+            ->allowEmpty('comments');
+
+        $validator
+            ->integer('downloads')
+            ->allowEmpty('downloads');
+
+        $validator
+            ->allowEmpty('pageURL');
+
+        $validator
+            ->allowEmpty('previewURL');
+
+        $validator
+            ->allowEmpty('webformatURL');
+
+        $validator
+            ->integer('imageWidth')
+            ->allowEmpty('imageWidth');
+
+        $validator
+            ->integer('imageHeight')
+            ->allowEmpty('imageHeight');
+
+        $validator
+            ->integer('type')
+            ->allowEmpty('type');
+
+        $validator
+            ->allowEmpty('image');
 
         return $validator;
     }
