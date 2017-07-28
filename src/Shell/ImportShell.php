@@ -93,9 +93,10 @@ class ImportShell extends Shell
         $image->pageURL = isset($data->pageURL) ? $data->pageURL : null;
         $image->webformatURL = isset($data->webformatURL) ? $data->webformatURL : null;
         $image->imageWidth = isset($data->imageWidth) ? $data->imageWidth : null;
+        $image->imageHeight = isset($data->imageHeight) ? $data->imageHeight : null;
         $image->type = isset($data->type) ? $data->type : null;
         $image->tag_id = $tag->id;
-        $this->Images->save($image);
+        //$this->Images->save($image);
         $this->getImageAndSave($image);
     }
 
