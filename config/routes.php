@@ -46,6 +46,8 @@ Router::defaultRouteClass(DashedRoute::class);
 Router::extensions(['json']);
 
 Router::prefix('api', function (RouteBuilder $routes) {
+    $routes->connect('/categories', ['controller' => 'Images', 'action' => 'index']);
+
     $routes->fallbacks(DashedRoute::class);
 });
 
