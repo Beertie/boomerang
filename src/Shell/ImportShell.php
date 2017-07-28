@@ -70,7 +70,7 @@ class ImportShell extends Shell
                 $more = false;
             }
             // to get all img
-            if (($round * $this->perPage) < $listOfImages->total) {
+            if (($round * $this->perPage) > $listOfImages->total) {
                 $more = false;
             }
             $round++;
