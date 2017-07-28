@@ -20,8 +20,8 @@ class TagsController extends AppController
      */
     public function index()
     {
-        //$tags = $this->paginate($this->Tags);
-        $tags = ['sport', 'life', 'foo', 'bar'];
+        $tags = $this->Tags->find('all');
+        $tags = ['data' => $tags->toArray(), 'succes' => true, 'message' => null];
 
         $this->set(compact('tags'));
         $this->set('_serialize', ['tags']);
