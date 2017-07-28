@@ -13,6 +13,8 @@ use App\Controller\AppController;
 class TagsController extends AppController
 {
 
+
+
     /**
      * Index method
      *
@@ -21,10 +23,11 @@ class TagsController extends AppController
     public function index()
     {
         $tags = $this->Tags->find('all');
-        $tags = ['data' => $tags->toArray(), 'succes' => true, 'message' => null];
 
-        $this->set(compact('tags'));
-        $this->set('_serialize', ['tags']);
+        $this->set('data', ['tags' =>$tags->toArray()]);
+        $this->set('succes', true);
+        $this->set('message', null);
+        $this->set('_serialize', ['data','succes','message']);
     }
 
     /**
