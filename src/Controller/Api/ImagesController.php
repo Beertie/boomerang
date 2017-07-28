@@ -20,13 +20,12 @@ class ImagesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Tags']
-        ];
-        $images = $this->paginate($this->Images);
+        $images = $this->Images->find()->limit(10);
 
-        $this->set(compact('images'));
-        $this->set('_serialize', ['images']);
+        $this->set('data',  $images->toArray());
+        $this->set('success', true);
+        $this->set('message', null);
+        $this->set('_serialize', ['data', 'success', 'message']);
     }
 
     /**
