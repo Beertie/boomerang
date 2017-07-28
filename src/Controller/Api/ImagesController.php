@@ -25,8 +25,6 @@ class ImagesController extends AppController
      */
     public function index()
     {
-
-
         $tags = $this->Images->Tags->find()->contain(['Images']);
         $data = [];
         /** @var Tag $tag */
@@ -64,8 +62,20 @@ class ImagesController extends AppController
             'contain' => ['Tags']
         ]);
 
-        $this->set('image', $image);
-        $this->set('_serialize', ['image']);
+        $data = [
+            'tag' => $image->tag['name'],
+            'previewHeight' => $image->imageWidth,
+            'previewWidth' => $image->imageWidth,
+            'imageWidth' => $image->imageWidth,
+            'imageHeight' => $image->imageWidth,
+            'image' => base64_encode(file_get_contents($image->webformatURL)),
+            'imaageId' => $image->id
+        ];
+
+        $this->set('data', $data);
+        $this->set('success', true);
+        $this->set('message', null);
+        $this->set('_serialize', ['data', 'success', 'message']);
     }
 
     /**
