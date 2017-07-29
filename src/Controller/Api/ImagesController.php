@@ -25,7 +25,7 @@ class ImagesController extends AppController
      */
     public function index()
     {
-        $tags = $this->Images->Tags->find()->contain(['Images']);
+        $tags = $this->Images->Tags->find()->contain(['Images'])->order(['name']);
         $data = [];
         /** @var Tag $tag */
         foreach ($tags as $tag) {
