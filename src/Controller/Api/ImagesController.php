@@ -86,8 +86,8 @@ class ImagesController extends AppController
         $data = [
             'id' => $image->id,
             'tag' => $image->tag['name'],
-            'height' => $image->imageWidth,
-            'width' => $image->imageWidth,
+            'height' => $image->previewHeight,
+            'width' => $image->previewWidth,
             'image' => base64_encode(file_get_contents($image->previewURL))
         ];
         $this->set('data', $data);
