@@ -77,4 +77,24 @@ class ImagesController extends AppController
         $this->set('message', null);
         $this->set('_serialize', ['data', 'success', 'message']);
     }
+
+
+    public function viewSmall(){
+        $image = $this->Images->get(10);
+        $data = [
+            'tag' => $image->tag['name'],
+            'previewHeight' => $image->imageWidth,
+            'previewWidth' => $image->imageWidth,
+            'imageWidth' => $image->imageWidth,
+            'imageHeight' => $image->imageWidth,
+            'image' => base64_encode(file_get_contents($image->previewURL)),
+            'imaageId' => $image->id
+        ];
+
+        $this->set('data', $data);
+        $this->set('success', true);
+        $this->set('message', null);
+        $this->set('_serialize', ['data', 'success', 'message']);
+
+    }
 }

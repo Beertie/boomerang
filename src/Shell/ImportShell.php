@@ -42,7 +42,7 @@ class ImportShell extends Shell
 
 
     /**
-     * @return Tag array
+     * @return array
      */
     public function getTags()
     {
@@ -116,5 +116,10 @@ class ImportShell extends Shell
         $image->image = $imageData;
         $this->Images->save($image);
         echo ".";
+    }
+
+
+    public function compress(){
+
     }
 }

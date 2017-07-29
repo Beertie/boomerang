@@ -42,7 +42,6 @@ class TagsController extends AppController
         $tag = $this->Tags->find()->where(['name' => $tag])->first();
         /** @var Image $image */
         $image = $this->Tags->Images->find()->where(['tag_id' => $tag->id])->firstOrFail();
-
         $data = [
             'previewHeight' => $image->imageWidth,
             'previewWidth' => $image->imageWidth,
