@@ -80,7 +80,9 @@ class ImagesController extends AppController
 
 
     public function viewSmall(){
-        $image = $this->Images->get(10);
+        $image = $this->Images->get(10, [
+            'contain' => ['Tags']
+        ]);
         $data = [
             'id' => $image->id,
             'tag' => $image->tag['name'],
