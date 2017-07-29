@@ -82,15 +82,12 @@ class ImagesController extends AppController
     public function viewSmall(){
         $image = $this->Images->get(10);
         $data = [
+            'id' => $image->id,
             'tag' => $image->tag['name'],
-            'previewHeight' => $image->imageWidth,
-            'previewWidth' => $image->imageWidth,
-            'imageWidth' => $image->imageWidth,
-            'imageHeight' => $image->imageWidth,
-            'image' => base64_encode(file_get_contents($image->previewURL)),
-            'imaageId' => $image->id
+            'height' => $image->imageWidth,
+            'width' => $image->imageWidth,
+            'image' => base64_encode(file_get_contents($image->previewURL))
         ];
-
         $this->set('data', $data);
         $this->set('success', true);
         $this->set('message', null);
