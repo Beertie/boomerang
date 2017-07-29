@@ -3,6 +3,8 @@
 namespace App\Controller\Api;
 
 use App\Controller\AppController;
+use App\Model\Entity\Image;
+use App\Model\Entity\Tag;
 
 /**
  * Tags Controller
@@ -30,6 +32,33 @@ class TagsController extends AppController
         $this->set('_serialize', ['data', 'success', 'message']);
     }
 
+
+    /**
+     * @param string $tag
+     */
+    public function getImageByTagForNow($tag){
+
+        /** @var Tag $tag */
+        $tag = $this->Tags->find()->where(['name' => $tag])->first();
+        /** @var Image $image */
+        $image = $this->Tags->Images->find()->where(['tag_id' => $tag->id])->firstOrFail();
+
+        $data = [
+            'previewHeight' => $image->imageWidth,
+            'previewWidth' => $image->imageWidth,
+            'imageWidth' => $image->imageWidth,
+            'imageHeight' => $image->imageWidth,
+            'image' => base64_encode(file_get_contents($image->webformatURL)),
+            'imaageId' => $image->id
+        ];
+
+        //TODO set image as used
+        $this->set('data',  $data);
+        $this->set('success', true);
+        $this->set('message', null);
+        $this->set('_serialize', ['data', 'success', 'message']);
+    }
+
     /**
      * View method
      *
@@ -48,73 +77,8 @@ class TagsController extends AppController
         $this->set('_serialize', ['tag']);
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $tag = $this->Tags->newEntity();
-        if ($this->request->is('post')) {
-            $tag = $this->Tags->patchEntity($tag, $this->request->getData());
-            if ($this->Tags->save($tag)) {
-                $this->Flash->success(__('The tag has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The tag could not be saved. Please, try again.'));
-        }
-        $this->set(compact('tag'));
-        $this->set('_serialize', ['tag']);
-    }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Tag id.
-     *
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $tag = $this->Tags->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $tag = $this->Tags->patchEntity($tag, $this->request->getData());
-            if ($this->Tags->save($tag)) {
-                $this->Flash->success(__('The tag has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The tag could not be saved. Please, try again.'));
-        }
-        $this->set(compact('tag'));
-        $this->set('_serialize', ['tag']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Tag id.
-     *
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $tag = $this->Tags->get($id);
-        if ($this->Tags->delete($tag)) {
-            $this->Flash->success(__('The tag has been deleted.'));
-        } else {
-            $this->Flash->error(__('The tag could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
-    }
 
     public function setTags()
     {

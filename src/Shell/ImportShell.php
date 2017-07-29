@@ -66,9 +66,12 @@ class ImportShell extends Shell
             Log::info("Running for [Tag={$tag->name}] on [Round={$round}] need [Total={$listOfImages->total}]");
 
             // if we hit 50 just stop for now
-            if($round == 50 ){
+            if($round == 2 ){
                 $more = false;
             }
+
+            //debug(($round * $this->perPage));
+
             // to get all img
             if (($round * $this->perPage) > $listOfImages->total) {
                 $more = false;

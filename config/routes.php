@@ -47,6 +47,8 @@ Router::extensions(['json']);
 
 Router::prefix('api', function (RouteBuilder $routes) {
     $routes->connect('/categories', ['controller' => 'Images', 'action' => 'index']);
+    $routes->connect('/tagImage/:tag', ['controller' => 'Tags', 'action' => 'getImageByTagForNow'], ['pass' => ['tag']]);
+
 
     $routes->fallbacks(DashedRoute::class);
 });
