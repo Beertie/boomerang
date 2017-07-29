@@ -7,20 +7,20 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * UsersImages Model
+ * UsersHasImages Model
  *
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\ImagesTable|\Cake\ORM\Association\BelongsTo $Images
  *
- * @method \App\Model\Entity\UsersImage get($primaryKey, $options = [])
- * @method \App\Model\Entity\UsersImage newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\UsersImage[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\UsersImage|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\UsersImage patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\UsersImage[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\UsersImage findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\UsersHasImage get($primaryKey, $options = [])
+ * @method \App\Model\Entity\UsersHasImage newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\UsersHasImage[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\UsersHasImage|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\UsersHasImage patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\UsersHasImage[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\UsersHasImage findOrCreate($search, callable $callback = null, $options = [])
  */
-class UsersImagesTable extends Table
+class UsersHasImagesTable extends Table
 {
 
     /**
@@ -33,7 +33,7 @@ class UsersImagesTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('users_images');
+        $this->setTable('users_has_images');
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',

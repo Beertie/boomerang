@@ -4,18 +4,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Tag Entity
+ * UsersHasTag Entity
  *
  * @property int $id
- * @property string $name
- * @property int $active
+ * @property int $user_id
+ * @property int $tag_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \App\Model\Entity\Image[] $images
- * @property \App\Model\Entity\User[] $users
+ * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Tag $tag
  */
-class Tag extends Entity
+class UsersHasTag extends Entity
 {
 
     /**

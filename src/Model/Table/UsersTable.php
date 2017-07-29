@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Model\Table;
 
+use Cake\Datasource\EntityInterface;
+use Cake\Event\Event;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -9,8 +12,8 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
- * @property |\Cake\ORM\Association\BelongsToMany $Images
- * @property |\Cake\ORM\Association\BelongsToMany $Tags
+ * @property |\Cake\ORM\Association\HasMany $UsersHasImages
+ * @property |\Cake\ORM\Association\HasMany $UsersHasTags
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -29,6 +32,7 @@ class UsersTable extends Table
      * Initialize method
      *
      * @param array $config The configuration for the Table.
+     *
      * @return void
      */
     public function initialize(array $config)
@@ -41,15 +45,11 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsToMany('Images', [
-            'foreignKey' => 'user_id',
-            'targetForeignKey' => 'image_id',
-            'joinTable' => 'users_images'
-        ]);
         $this->belongsToMany('Tags', [
-            'foreignKey' => 'user_id',
-            'targetForeignKey' => 'tag_id',
-            'joinTable' => 'users_tags'
+            'through' => 'UsersHasTags'
+        ]);
+        $this->belongsToMany('Images', [
+            'through' => 'UsersHasImages'
         ]);
     }
 
@@ -57,6 +57,7 @@ class UsersTable extends Table
      * Default validation rules.
      *
      * @param \Cake\Validation\Validator $validator Validator instance.
+     *
      * @return \Cake\Validation\Validator
      */
     public function validationDefault(Validator $validator)
@@ -66,5 +67,15 @@ class UsersTable extends Table
             ->allowEmpty('id', 'create');
 
         return $validator;
+    }
+
+    public function beforeSave(Event $event, EntityInterface $entity, \ArrayObject $options)
+    {
+        // link new users to all tgs
+        if ($entity->isNew()) {
+            $tags = $this->Tags->find()->toArray();
+            $entity->tags = $tags;
+        }
+        return $entity;
     }
 }

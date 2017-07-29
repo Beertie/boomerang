@@ -11,7 +11,6 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\TagsTable|\Cake\ORM\Association\BelongsTo $Tags
  * @property \App\Model\Table\ResourcesTable|\Cake\ORM\Association\HasMany $Resources
- * @property |\Cake\ORM\Association\BelongsToMany $Users
  *
  * @method \App\Model\Entity\Image get($primaryKey, $options = [])
  * @method \App\Model\Entity\Image newEntity($data = null, array $options = [])
@@ -48,11 +47,6 @@ class ImagesTable extends Table
         ]);
         $this->hasMany('Resources', [
             'foreignKey' => 'image_id'
-        ]);
-        $this->belongsToMany('Users', [
-            'foreignKey' => 'image_id',
-            'targetForeignKey' => 'user_id',
-            'joinTable' => 'users_images'
         ]);
     }
 

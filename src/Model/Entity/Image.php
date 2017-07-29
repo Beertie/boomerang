@@ -28,6 +28,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Tag $tag
  * @property \App\Model\Entity\Resource[] $resources
+ * @property \App\Model\Entity\User[] $users
  */
 class Image extends Entity
 {

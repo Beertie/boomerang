@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * Tags Model
  *
  * @property \App\Model\Table\ImagesTable|\Cake\ORM\Association\HasMany $Images
- * @property |\Cake\ORM\Association\BelongsToMany $Users
+ * @property |\Cake\ORM\Association\HasMany $UsersHasTags
  *
  * @method \App\Model\Entity\Tag get($primaryKey, $options = [])
  * @method \App\Model\Entity\Tag newEntity($data = null, array $options = [])
@@ -44,10 +44,8 @@ class TagsTable extends Table
         $this->hasMany('Images', [
             'foreignKey' => 'tag_id'
         ]);
-        $this->belongsToMany('Users', [
-            'foreignKey' => 'tag_id',
-            'targetForeignKey' => 'user_id',
-            'joinTable' => 'users_tags'
+        $this->hasMany('UsersHasTags', [
+            'foreignKey' => 'tag_id'
         ]);
     }
 

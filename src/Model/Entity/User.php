@@ -9,6 +9,9 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ *
+ * @property \App\Model\Entity\Image[] $images
+ * @property \App\Model\Entity\Tag[] $tags
  */
 class User extends Entity
 {

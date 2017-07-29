@@ -12,6 +12,7 @@
  * @since     0.2.9
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
 use Cake\Controller\Controller;
@@ -56,6 +57,7 @@ class AppController extends Controller
      * Before render callback.
      *
      * @param \Cake\Event\Event $event The beforeRender event.
+     *
      * @return \Cake\Network\Response|null|void
      */
     public function beforeRender(Event $event)
@@ -65,5 +67,32 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+    }
+
+    /**
+     * Check if user already exsit if not just created en new one
+     * and set user id on the next call;
+     *
+     * @return int userId
+     */
+    public function getUserId()
+    {
+        $userModel = $this->loadModel('Users');
+        $user_id = (int)$this->request->getQuery('user_id');
+
+        if (!isset($user_id) OR $user_id == 0) {
+            $user = $userModel->newEntity();
+            $user = $userModel->save($user);
+            $this->set('user_id', $user->id);
+        } else {
+            $user = $userModel->find()->where(['id' => $user_id]);
+            if ($user->count() == 0) {
+                $user = $userModel->newEntity();
+                $user = $userModel->save($user);
+                $this->set('user_id', $user->id);
+            }
+        }
+
+        return $user->id;
     }
 }
