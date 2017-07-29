@@ -22,11 +22,12 @@ use Cake\ORM\Entity;
  * @property string $webformatURL
  * @property int $imageWidth
  * @property int $imageHeight
- * @property int $type
+ * @property string $type
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
  * @property \App\Model\Entity\Tag $tag
+ * @property \App\Model\Entity\Resource[] $resources
  */
 class Image extends Entity
 {

@@ -7,11 +7,8 @@ use Cake\ORM\Entity;
  * User Entity
  *
  * @property int $id
- * @property int $user_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
- *
- * @property \App\Model\Entity\User[] $users
  */
 class User extends Entity
 {
